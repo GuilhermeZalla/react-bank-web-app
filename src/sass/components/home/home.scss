@@ -1,0 +1,235 @@
+*,
+::after,
+::before{
+    box-sizing: border-box;
+}
+
+
+@mixin layoutFlex($display, $justify, $align, $flow, $gap) {
+    display: $display;
+    justify-content: $justify;
+    align-content: $align;
+    flex-flow: $flow;
+    gap: $gap;
+};
+
+@mixin fitImage($maxW, $minW, $maxH, $minH, $obj-fit, $display){
+    max-width: $maxW;
+    min-width: $minW;
+    max-height: $maxH;
+    min-height: $minH;
+    object-fit: $obj-fit;
+    display: $display;
+}
+
+body{
+    scroll-behavior: smooth;
+    color: $clr-neutral;
+    user-select: none;
+    font-family: $fnt-general;
+
+    em{
+        font-style: italic;
+    }
+
+    button, input{
+        background-color: transparent;
+        border: none;
+        outline: none;
+        padding: 0;
+        cursor: pointer;
+    }
+}
+
+.home-container{
+    @include layoutFlex(flex, center, center, column nowrap, 10px);
+    &>figure{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        img{
+            @include fitImage(100%, 100%, 100%, 100%, cover, block);
+            filter: brightness(20%);
+        }
+    }
+    .header{
+        @include layoutFlex(flex, center, center, row nowrap, 15px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background-color: $clr-primary;
+        margin-bottom: 20px;
+        padding: 15px;
+        box-shadow: 0 1px 10px 1px #000000c4;
+
+        .header__list{
+            @include layoutFlex(flex, center, center, row nowrap, 15px);
+            max-width: 600px;
+            .header__item{
+                @include layoutFlex(inherit, center, center, row nowrap, 0);
+
+                h1{
+                    font-size: 1.3rem;
+                    padding-top: 15px;
+                }
+
+                button {
+                    vertical-align: middle;
+                    color: $clr-neutral;
+                    margin: 10px 0 0 10px;
+                    & > svg{
+                        font-size: 1.3rem;
+                    }
+                    &:hover{
+                        &>svg{
+                            color: $clr-brand;
+                        }
+                    }
+                }
+
+                figure {
+                    width: 45px;
+                    border-radius: 50px;
+                    &>img{
+                        @include fitImage(100%, 100%, 100%, 100%, cover, block);
+                        border-radius: inherit;
+                    }
+
+                    &:hover{
+                        transform: scale(110%);
+                    }
+                }
+            }
+        }
+    }
+    .main{
+        @include layoutFlex(flex, center, center, column wrap, 20px);
+        margin: 100px 0 70px 0;
+        section{
+            background-color: $clr-primary;
+            border-radius: 10px;
+            padding: 25px;
+            width: 600px;
+
+            .section__title{
+                font-weight: bold;
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+
+            &>.section__div{
+                @include layoutFlex(flex, flex-start, flex-start, row nowrap, 25px);
+                background-color: $clr-articles;
+                border-radius: inherit;
+                padding: 30px 20px 30px 20px;
+                position: relative;
+
+                &>svg{
+                    font-size: 2.4rem;
+                    color: $clr-brand;
+                }
+                .section__article{
+                    @include layoutFlex(flex, flex-start, center, column wrap, 15px);
+                    background-color: $clr-articles;
+                    &>span{
+                        opacity: 75%;
+                            font-size: .80rem;
+                            font-weight: normal;
+                    }
+                    .section__subtitle{
+                        font-weight: bold;
+                        font-size: 1.8rem;
+                        margin-bottom: 20px;
+                        &>em{
+                            font-size: .80rem;
+                            font-weight: normal;
+                            opacity: 50%;
+                            margin-left: .50rem;
+                        }
+                    }
+                    &>a{
+                        position: absolute;
+                        right: 20px;
+                        bottom: 20px;
+                        color: $clr-neutral;
+                        font-size: .95rem;
+                        &:hover{
+                            opacity: 70%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 469px) {
+    .home-container{
+        .main{
+            section{
+                padding: 15px;
+                width: 100%;
+                .section__title{
+                    font-size: .95rem;
+                    margin-bottom: 15px;
+                }
+
+                &>.section__div{
+                    @include layoutFlex(flex, flex-start, flex-start, row nowrap, 20px);
+                    padding: 20px 15px 20px 15px;
+
+                    &>svg{
+                        font-size: 2.2rem;
+                    }
+                    .section__article{
+                        @include layoutFlex(flex, flex-start, center, column wrap, 15px);
+
+                        .section__subtitle{
+                            font-size: 1.3rem;
+                            margin-bottom: 15px;
+                        }
+                        &>a{
+                            font-size: .90rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 599px){
+    .home-container{
+        .main{
+            section{
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 990px){
+    .home-container{
+        .main{
+            section{
+                width: 530px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 990px){
+    .home-container{
+        margin-bottom: 20px;
+        .main{
+            @include layoutFlex(flex, center, center, column wrap, 30px);
+            margin: 110px 0 70px 0;
+            padding: 0 15px;
+        }
+    }
+}

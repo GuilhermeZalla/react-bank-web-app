@@ -1,0 +1,18 @@
+/* Import Colors */
+
+@import './variables/colors/colors.scss';
+
+/* Import Fonts */
+
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Audiowide&display=swap';
+
+@import './variables/fonts/fonts.scss';
+
+
+/* Import Components */
+
+@import './components/validation/validation.scss';
+@import './components/home/home.scss';
+@import './components/home/history/history.scss';
+@import './components/home/transactions/transactions.scss';

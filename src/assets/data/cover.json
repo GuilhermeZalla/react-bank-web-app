@@ -1,0 +1,19 @@
+{
+   "covers":[
+    {
+        "id": "1",
+        "image": "https://i.imgur.com/YhJXj7C.png",
+        "title": "Our bank is accepted everywhere"
+    },
+    {
+       "id": "2",
+       "image": "https://i.imgur.com/et9EIRN.png",
+       "title": "The best secure service for you"
+    },
+    {
+      "id": "3",
+      "image": "https://i.imgur.com/YrisCiF.png",
+      "title": "Have free control of your account"
+    }
+   ]
+}

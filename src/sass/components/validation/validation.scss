@@ -1,0 +1,296 @@
+@charset "UTF-8";
+
+@mixin layoutFlex($display, $justify, $align, $flow, $gap) {
+    display: $display;
+    justify-content: $justify;
+    align-content: $align;
+    flex-flow: $flow;
+    gap: $gap;
+}
+
+;
+
+@mixin fitImage($maxW, $minW, $maxH, $minH, $obj-fit, $display) {
+    max-width: $maxW;
+    min-width: $minW;
+    max-height: $maxH;
+    min-height: $minH;
+    object-fit: $obj-fit;
+    display: $display;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+
+    img {
+        @include fitImage(100%, 100%, 100%, 100%, cover, inline-block);
+    }
+}
+
+.container {
+    @include layoutFlex(flex, flex-start, flex-start, row nowrap, 0);
+    background-color: $clr-neutral;
+    position: relative;
+    height: 100vh;
+
+    .cover,
+    form {
+        flex-basis: 50%;
+        width: 100%;
+    }
+
+    &>.logo {
+        @include layoutFlex(flex, flex-start, center, row nowrap, 10px);
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        max-width: 38px;
+
+        &::after {
+            content: 'Nova Geração';
+            font-family: 'Audiowide', cursive;
+            font-size: 1rem;
+            font-weight: 400;
+            color: $clr-articles;
+            margin-top: 4px;
+        }
+    }
+
+    form {
+        @include layoutFlex(flex, center, center, column wrap, 0);
+        color: $clr-form;
+
+        button {
+
+            &[name='login'],
+            &[name='register'] {
+                color: $clr-brand;
+                vertical-align: middle;
+                padding: 0;
+                font-size: .90rem;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        fieldset {
+            @include layoutFlex(inherit, flex-start, flex-start, column wrap, 30px);
+            width: 380px;
+
+            legend {
+                font-size: 2.2rem;
+                font-weight: bold;
+                margin-bottom: 15px;
+            }
+
+            p {
+                @include layoutFlex(flex, none, none, column wrap, 15px);
+                position: relative;
+                width: 100%;
+
+                input {
+                    border-bottom: 1px solid #808080bd;
+                    padding: 10px 0;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: .85em;
+
+                    &:focus {
+                        border-bottom: 1px solid $clr-primary;
+                        color: $clr-primary;
+                    }
+                }
+
+                &.passwords {
+                    @include layoutFlex(flex, space-between, center, row nowrap, 0);
+
+                    &>span {
+
+                        &>label {
+                            font-size: .85rem;
+                            font-weight: 500;
+                        }
+
+                        &>input {
+                            vertical-align: middle;
+                            margin-right: 6px;
+                        }
+                    }
+                }
+
+                &.submit {
+                    margin: 10px 0;
+
+                    &>button {
+                        width: 100%;
+                        background-color: $clr-brand;
+                        border-radius: 3px;
+                        padding: 10px;
+                        color: $clr-neutral;
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: bold;
+                        font-size: 1rem;
+
+                        &:hover {
+                            opacity: .8;
+                        }
+                    }
+
+                    ;
+                }
+
+                &:last-child {
+                    @include layoutFlex(flex, center, center, row wrap, 5px);
+                    font-size: .95rem;
+                }
+
+                .warning {
+                    position: absolute;
+                    right: 0;
+                    bottom: -20px;
+                    color: $clr-warning;
+                    font-weight: bold;
+                    font-size: .85rem;
+                    text-align: right;
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .cover {
+        @include layoutFlex(flex, center, center, column wrap, 30px);
+        background-image: linear-gradient(to right top, #7A20E5 30%, $clr-brand );
+
+        .slider {
+            &>figure {
+                max-width: 450px;
+            }
+        }
+
+        article {
+            text-align: center;
+            line-height: .7cm;
+            margin: 5px 0 30px 0;
+
+            h1 {
+                font-weight: bold;
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: .90rem;
+                letter-spacing: 1px;
+                opacity: 90%;
+            }
+        }
+
+        &>span {
+            @include layoutFlex(flex, space-between, center, row nowrap, 10px);
+
+            &>.slider__btns {
+                &>button {
+                    background-color: $clr-neutral;
+                    opacity: 70%;
+                    border-radius: 10px;
+                    padding: 5px;
+                    margin: 0 5px;
+                    cursor: initial;
+                    &:first-child{
+                        opacity: 100%;
+                    }
+                    &:hover {
+                        opacity: 100%;
+                    }
+                }
+            }
+
+            &>button {
+                transition: all 50ms ease-in-out;
+
+                &>svg {
+                    color: $clr-neutral;
+                    font-size: 1.7rem;
+                }
+
+                &:active {
+                    transform: scale(105%);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 599px){
+    .container{
+        form{
+            padding: 0 20px;
+            fieldset{
+                width: 100%;
+            }
+        }
+
+        .cover{
+            height: 53%;
+            padding: 0 20px;
+            article {
+                line-height: .6cm;
+
+                p {
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 990px){
+    .container{
+        @include layoutFlex(flex, center, center, row wrap, 30px);
+        .cover,
+        form {
+            flex-basis: 100%;
+            width: 100%;
+        }
+        form {
+            fieldset {
+
+                &:first-child{
+                    margin-top: 100px;
+                }
+            }
+        }
+        .cover{
+            @include layoutFlex(flex, center, center, column wrap, 10px);
+            .slider {
+                text-align: center;
+                &>figure {
+                    max-width: 24em;
+                }
+                article {
+                    margin: 0;
+
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 990px){
+    .container {
+        form {
+            fieldset {
+                width: 500px;
+                &:first-child{
+                    margin-top: 100px;
+                }
+            }
+        }
+        .cover{
+            padding-bottom: 30px;
+        }
+    }
+}

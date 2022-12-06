@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+.transactions {
+    overflow: hidden;
+    position: relative;
+    height: 320px;
+
+    .modal-warning{
+        @include layoutFlex(flex, center, center, row nowrap, 0);
+        position: fixed;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 99;
+    }
+
+    button {
+        @include layoutFlex(flex, space-between, center, row nowrap, 10px);
+        border-radius: 10px;
+        text-align: left;
+        background-color: #000000;
+        padding: 12px;
+        color: $clr-neutral;
+        font-weight: bold;
+        font-size: .90rem;
+        width: 100%;
+        transition: all 90ms ease-in-out;
+
+        &>svg {
+            font-size: 1.1rem;
+        }
+
+        &:hover {
+            background-color: $clr-brand;
+        }
+
+        &:active {
+            transform: scale(105%);
+        }
+    }
+
+    &>span{
+        position: absolute;
+        bottom: 12px;
+        left: 30px;
+        right: 620px;
+        background-color: $clr-brand;
+        border-radius: 10px;
+        padding: 1px;
+        transition: all 400ms ease-in-out;
+        &:first-of-type{
+            z-index: 1;
+        }
+    }
+
+    .bar{
+        background-color: #808080bd;
+        padding: 1px;
+        right: 30px;
+    }
+
+    & form, .resume {
+        @include layoutFlex(flex, center, center, column wrap, 0);
+        background-color: $clr-articles;
+        border-radius: inherit;
+        padding: 30px 20px 30px 20px;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        left: 20px;
+        transition: all 650ms ease-in-out;
+        -o-transition: all 650ms ease-in-out;
+        -moz-transition: all 650ms ease-in-out;
+        -webkit-transition: all 650ms ease-in-out;
+
+        & span{
+            &::before{
+                font-size: 1.4rem;
+                font-weight: bold;
+                content: '$';
+            }
+        }
+
+        &:nth-last-child(2) {
+            transform: translateX(650px);
+
+            &>fieldset {
+                &>legend {
+                    position: absolute;
+                    top: 15px;
+                    left: 20px;
+                    font-size: .95rem;
+                    font-weight: bold;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $clr-brand;
+                    }
+                }
+
+                p {
+                    @include layoutFlex(flex, center, center, column wrap, 15px);
+                    text-align: center;
+
+                    &>button {
+                        @include layoutFlex(inherit, center, center, row nowrap, 20px);
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        input {
+
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: left;
+            color: $clr-neutral;
+            border-bottom: 1px solid #808080bd;
+            padding: 15px 5px;
+            margin-bottom: 10px;
+
+            &::placeholder {
+                opacity: 70%;
+            }
+
+            &:focus {
+                border-bottom: 1px solid transparent;
+            }
+        }
+
+        p {
+            label {
+                font-size: .90rem;
+                opacity: 50%;
+                text-align: center;
+            }
+
+            &:first-child {
+                @include layoutFlex(flex, center, center, column wrap, 15px);
+            }
+
+            &:last-child {
+                @include layoutFlex(flex, center, center, row nowrap, 15px);
+                margin-top: 15px;
+            }
+        }
+    }
+
+    .resume{
+        padding-bottom: 15px;
+        transform: translateX(700px);
+        &>h2{
+            position: absolute;
+            top: 20px;
+            font-weight: 1rem;
+            font-weight: bold;
+        }
+        table{
+            margin: 10px 0;
+            width: 100%;
+            tbody{
+                tr{
+                    &:first-child{
+                        border-bottom: 1px solid rgba(128, 128, 128, 0.171);
+                    }
+                    th, td{
+                        padding: 20px 0 20px 15px;
+                        text-align: left;
+                    }
+                    th{
+                        opacity: 50%;
+                        font-size: .85rem;
+                    }
+                    td{
+                        font-size: .85rem;
+                    }
+                }
+            }
+        }
+        &>button{
+            @include layoutFlex(flex, center, center, row nowrap, 0);
+            width: 100%;
+         }
+    }
+}
+
+@media screen and (max-width: 469px){
+    .transactions {
+        height: 260px;
+        button {
+            @include layoutFlex(flex, space-between, center, row nowrap, 10px);
+            padding: 10px;
+            font-size: .85rem;
+            width: 100%;
+
+            &>svg {
+                font-size: .95rem;
+            }
+        }
+
+        & form, .resume {
+            @include layoutFlex(flex, center, center, column wrap, 0);
+            padding: 20px;
+            & span{
+                &::before{
+                    font-size: 1.2rem;
+                }
+            }
+
+            input {
+
+                font-size: 1rem;
+                padding: 10px 5px;
+                margin-bottom: 5px;
+            }
+
+            p {
+                label {
+                    font-size: .85rem;
+                }
+
+                &:last-child {
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        .resume{
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            &>h2{
+                top: 10px;
+                font-size: .90rem;
+            }
+            table{
+                margin: 10px 0 0 0;
+                tbody{
+                    tr{
+                        th, td{
+                            padding: 12px 0 12px 12px;
+                        }
+                    }
+                }
+            }
+            &>button{
+                @include layoutFlex(flex, center, center, row nowrap, 0);
+                width: 100%;
+                font-size: .80rem;
+             }
+        }
+    }
+}
